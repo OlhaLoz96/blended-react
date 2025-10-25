@@ -1,17 +1,40 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const fetchUsers = async () => {
-//   const response = await axios.get(
-//     "https://jsonplaceholder.typicode.com/users"
-//   );
-//   return response.data;
-// };
+interface User {
+  email: string;
+  id: number;
+  name: string;
+  phone: string;
+  username: string;
+  website: string;
+  company: Company;
+  address: Address;
+}
 
-// const getUsers = async () => {
-//   const users = await fetchUsers();
-//   console.log(users);
-// };
+interface Company {
+  bs: string;
+  catchPhrase: string;
+  name: string;
+}
 
-// getUsers();
+interface Address {
+  city: string;
+  geo: { lat: string; lng: string };
+  street: string;
+  suite: string;
+  zipcode: string;
+}
 
-// https://github.com/xXMrSnakeXx/practic-25-10 репозиторій ментора
+const fetchUsers = async (): Promise<User[]> => {
+  const response = await axios.get<User[]>(
+    "https://jsonplaceholder.typicode.com/users"
+  );
+  return response.data;
+};
+
+const getUsers = async () => {
+  const users = await fetchUsers();
+  console.log(users);
+};
+
+getUsers();
